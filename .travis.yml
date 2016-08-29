@@ -1,0 +1,16 @@
+language: go
+go:
+  - 1.7
+
+before_install:
+  # This allows import statements to retain "github.com/allenluce"
+  # references but run CI from forked repos.
+  - mkdir -p $HOME/gopath/src/github.com/allenluce
+  - ln -s $HOME/gopath/src/github.com/$TRAVIS_REPO_SLUG $HOME/gopath/src/github.com/allenluce/autokey
+  - cd $HOME/gopath/src/github.com/allenluce/autokey
+
+before_script:
+  - go get golang.org/x/tools/cmd/cover
+
+script:
+  - bash build.sh
